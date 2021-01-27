@@ -1,0 +1,1231 @@
+@import 'var';
+@import 'mix';
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap');
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: $primary-font;
+  font-size: $primary-fsize;
+  background-color: $color-bg;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.circle__color_yellow {
+  background-color: $color-yellow;
+  color: $color-first-bg;
+}
+
+.circle__color_white {
+  background-color: $color-white;
+  color: $color-first-bg;
+}
+
+.circle__color_blue {
+  background-color: $color-blue;
+}
+
+.circle__color_light-blue {
+  background-color: $color-light-blue;
+}
+
+.circle__color_dark-blue {
+  background-color: $color-dark-blue;
+}
+
+.circle__color_orange {
+  background-color: $color-orange;
+}
+
+.circle__color_light-orange {
+  background-color: $color-light-orange;
+}
+
+.circle__color_cyan {
+  background-color: $color-cyan;
+  color: $color-dirty-gray !important;
+}
+
+.container {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1170px;
+
+  @include mobile($ipad) {
+
+    padding: 0 30px;
+  }
+}
+
+.btn {
+  display: block;
+  margin-right: 10px;
+  padding: 15px 35px;
+  width: 160px;
+  height: 54px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 7px;
+  background-color: $color-blue;
+  color: $color-white;
+  transition: color 0.2s ease-in-out, border-left 0.3s linear, border-right 0.3s linear;
+  //  transition: border-top 0.2s ease-in-out 0.1s, border-bottom 0.2s ease-in-out 0.1s;
+
+  &:hover {
+    color: $color-yellow;
+    border-left: 2px solid $color-yellow;
+    border-right: 2px solid $color-yellow;
+  }
+
+  @include mobile($iphone) {
+    display: none;
+
+    &:first-child {
+      display: block;
+    }
+  }
+
+  &-wrap {
+    display: flex;
+
+    @include mobile($ipad) {
+      justify-content: space-between;
+    }
+    
+    @include mobile($iphone) {
+        display: block;
+      }
+  }
+}
+
+.color-orange {
+  background-color: $color-orange;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 0;
+  z-index: 10;
+  transition: transform 0.3s linear;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+
+    @include mobile($ipad) {
+      padding-right: 60px;
+    }
+
+    @include mobile($ipad) {
+      & .social {
+        display: none;
+      }
+    }
+  }
+
+  &__logo {
+    @include text(24px, 700, uppercase);
+    text-decoration: none;
+    cursor: pointer;
+    color: $color-white;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: $color-orange;
+    }
+
+    @include mobile($iphone) {
+      font-size: 16px;
+    }
+  }
+
+  &_fixed {
+    position: fixed;
+    padding: 19px 0;
+    top: -70px;
+    transform: translateY(69px);
+    background-color: $color-first-bg;
+    
+    & .nav__link{
+      color: $color-first-bg;
+    }
+  }
+}
+
+.menu {
+  @include mobile($ipad) {
+    position: relative;
+    display: block;
+    width: 30%;
+    margin-right: -20px;
+  }
+}
+
+.nav {
+  display: flex;
+  width: 600px;
+  justify-content: space-around;
+  padding: 5px 0;
+
+
+  &__link {
+    position: relative;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    color: $color-gray;
+    overflow: hidden;
+    transition: color 0.2s ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -16px;
+      width: 12px;
+      height: 100%;
+      background-color: $color-first-bg;
+      transform: rotate(45deg);
+      opacity: 0.5;
+      transition: transform 0.3s linear;
+    }
+
+    &:hover {
+      color: $color-yellow;
+
+      &::before {
+        transform: translateX(200px);
+      }
+    }
+
+    @include mobile($ipad) {
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      visibility: hidden;
+      //      background-color: $color-first-bg;
+      transition: top 0.3s linear;
+    }
+  }
+
+  @include mobile($ipad) {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+.nav-toggle {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  display: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  opacity: 0.75;
+  z-index: 2;
+
+  & span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: $color-white;
+    color: transparent;
+    transition: background .2s linear;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background-color: $color-white;
+      transition: transform .2s linear;
+    }
+
+    &::before {
+      top: -10px;
+    }
+
+    &::after {
+      top: 10px;
+    }
+  }
+
+  &_active {
+
+    span {
+      background: none;
+
+      &::before {
+        transform: rotate(-45deg);
+        transform-origin: right top;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+        transform-origin: right bottom;
+      }
+    }
+
+    & ~ .menu .nav__link {
+      visibility: visible;
+
+      @for $i from 1 through 4 {
+
+        &:nth-child(#{$i}) {
+          top: 20px + 30px*$i;
+        }
+      }
+    }
+
+  }
+
+  @include mobile($ipad) {
+    display: block;
+  }
+}
+
+.social {
+  display: flex;
+
+  &__icon {
+    margin-left: 32px;
+    font-size: 28px;
+    cursor: pointer;
+    color: $color-white;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: $color-yellow;
+    }
+  }
+}
+
+.first {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin-bottom: 180px;
+  background-color: $color-first-bg;
+
+  @include mobile($iphone) {
+    margin-bottom: 50px;
+  }
+
+  &__bg {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 47%;
+
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    //    height: 100%;
+
+    @include mobile($ipad) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__item {
+    display: flex;
+    width: 50%;
+    height: 100vh;
+    //    min-height: 790px;
+    flex-direction: column;
+    justify-content: center;
+    color: $color-white;
+
+    @include mobile($ipad) {
+      width: 100%;
+      height: 50%;
+      padding: 80px 70px 10px;
+    }
+
+    @include mobile($iphone) {
+      padding: 60px 0 0;
+    }
+
+    & span {
+      position: absolute;
+      @include text(16px, 700, uppercase);
+
+      border-radius: 50%;
+      text-align: center;
+
+      &:nth-of-type(1) {
+        top: 25%;
+        right: 9%;
+        @include square(60px);
+
+        color: $color-first-bg;
+
+        @include mobile($ipad) {
+          top: 12%;
+          left: 18%;
+        }
+      }
+
+      &:nth-of-type(2),
+        {
+        top: 51%;
+        @include square(90px);
+
+        @include mobile($ipad) {
+          top: 30%;
+          left: 25%;
+        }
+      }
+
+      &:nth-of-type(3) {
+        top: 43%;
+        right: 5%;
+        @include square(90px);
+
+        @include mobile($ipad) {
+          top: 22%;
+          right: 22%;
+        }
+      }
+
+      &:nth-of-type(4) {
+        bottom: 12%;
+        right: 8%;
+        @include square(55px);
+        color: $color-first-bg;
+
+        @include mobile($ipad) {
+          top: 46%;
+          right: 20%;
+        }
+
+        @include mobile($iphone) {
+          top: 38%;
+        }
+      }
+
+      @include mobile($iphone) {
+        z-index: 1;
+      }
+    }
+
+  }
+
+  &__image {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 313px;
+    height: auto;
+    margin-left: 100px;
+    z-index: 2;
+
+    @include mobile($ipad) {
+      max-width: 220px;
+      margin: 0 auto;
+
+    }
+
+    @include mobile($iphone) {
+      max-width: 100px;
+    }
+  }
+
+  &__title {
+    width: 500px;
+    @include text(60px, 700);
+
+    @include mobile($iphone) {
+      margin-top: -20px;
+      font-size: 30px;
+      width: 250px;
+    }
+  }
+
+  &__subtitle {
+    width: 400px;
+    margin: 40px 0 60px;
+
+    @include mobile($iphone) {
+      margin: 30px 0;
+      width: 100%;
+    }
+  }
+
+  &__scroll {
+    position: absolute;
+    bottom: 0;
+    left: 49%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: $color-white;
+    animation: jump 0.7s linear infinite;
+    transition: background 0.2s ease-in-out;
+
+    @include mobile($iphone) {
+      left: 72%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 30%;
+      left: 35%;
+      width: 15px;
+      height: 15px;
+      border-left: 2px solid red;
+      border-bottom: 2px solid red;
+      transform: rotate(-45deg);
+    }
+
+
+
+    & span {
+      position: absolute;
+      visibility: hidden;
+      top: -100px;
+      left: -35px;
+      width: 120px;
+      height: 50px;
+      padding-top: 15px;
+      border-radius: 8px;
+      background-color: $color-white;
+      //      border: 1px solid $color-orange;
+      text-align: center;
+      color: $color-orange;
+      opacity: 0;
+      transition: all 0.3s linear;
+
+
+      &::after {
+        content: "";
+        position: absolute;
+        //        display: block;
+        bottom: -7px;
+        left: 53px;
+        width: 14px;
+        height: 14px;
+        background-color: $color-white;
+        transform: rotate(45deg);
+
+      }
+    }
+
+    &:hover {
+      //      background-color: $color-yellow;
+      animation: none;
+
+      & span {
+        visibility: visible;
+        transform: translateY(30px);
+        opacity: 1;
+      }
+    }
+  }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -65px;
+      left: -75%;
+      //    display: block;
+      height: 200%;
+      width: 250%;
+      background-color: $color-wave-2;
+      border-bottom-left-radius: 100%;
+      border-bottom-right-radius: 100%;
+      z-index: -1;
+  
+      @include mobile($ipad) {
+        display: none;
+      }
+    }
+
+
+}
+
+.wave-1 {
+  background: url(../img/first/wave-1.png) center no-repeat;
+  background-size: cover;
+  //  background-color: $color-wave-1;
+  color: $color-wave-1;
+  opacity: 0.7;
+}
+
+.wave-2 {
+  background: url(../img/first/wave-2.png) center no-repeat;
+  background-size: cover;
+  color: $color-wave-2;
+  opacity: 0.8;
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: 20px 0 90px;
+  text-align: left;
+
+  @include mobile($iphone) {
+    padding: 20px 0;
+  }
+
+  &__title {
+    margin-bottom: 30px;
+    @include text(36px, 700, uppercase);
+    text-align: center;
+    color: $color-first-bg;
+
+    @include mobile($iphone) {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: $color-dark-gray;
+  }
+}
+
+.features {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 85px;
+  margin-bottom: 65px;
+
+  @include mobile($iphone) {
+    margin: 30px auto 15px;
+  }
+
+  &__item {
+    position: relative;
+    width: 32%;
+    max-width: 370px;
+    padding: 15px 0 15px 100px;
+
+    @include mobile($ipad) {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    @include mobile($iphone) {
+      padding: 15px 0;
+      text-align: center;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    top: 15px;
+    left: 0;
+
+    @include mobile($iphone) {
+      position: relative;
+    }
+  }
+
+  &__title {
+    margin-bottom: 20px;
+    @include text(24px, 700);
+    color: $color-features-title;
+
+    @include mobile($iphone) {
+      margin-top: 30px;
+    }
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-features-text;
+  }
+
+  @include mobile($ipad) {
+    display: block;
+  }
+}
+
+.widgets {
+  width: 100%;
+
+  &__image {
+    display: block;
+    width: 100%;
+    box-shadow: 0 25px 30px 0 $color-widget-shadow;
+
+  }
+}
+
+.slider {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: 60px 200px;
+  width: 100%;
+
+  @include mobile($ipad) {
+    padding: 60px 80px;
+  }
+
+  @include mobile($ipad) {
+    height: 450px;
+  }
+
+  &__item {
+    width: 100%;
+    max-width: 317px;
+    transition: all 0.2s linear;
+
+    @include mobile($ipad) {
+      max-width: 230px;
+    }
+
+    @include mobile($iphone) {
+      display: none;
+
+    }
+
+    &_active {
+      position: absolute;
+      display: block;
+      //      max-width: 370px;
+      height: auto;
+      top: 60px;
+      left: 400px;
+      transform: scale(1.15, 1.15);
+
+      @include mobile($ipad) {
+        left: 35%;
+      }
+
+      @include mobile($iphone) {
+        position: static;
+//        max-width: 260px;
+        margin: 10px auto;
+      }
+    }
+  }
+
+  &-prev,
+  &-next {
+    position: absolute;
+    top: 130px;
+    height: 80%;
+    width: 15%;
+    max-width: 170px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    transition: all 0.2s linear;
+
+    @include mobile($ipad) {
+      height: 90%;
+    }
+
+    @include mobile($iphone) {
+      top: 40px;
+    }
+
+    &::before {
+      content: "";
+      position: relative;
+      display: block;
+      width: 28px;
+      height: 28px;
+      margin: auto;
+      border-left: 2px solid $color-gray;
+      border-top: 2px solid $color-gray;
+      transition: all 0.2s linear;
+    }
+
+    &:hover {
+      background-color: adjust-color($color: $color-gray, $alpha: -0.7);
+
+      &::before {
+        border-color: $color-white;
+      }
+    }
+  }
+
+  &-prev {
+    left: 0;
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &-next {
+    right: 0;
+
+    &::before {
+      transform: rotate(135deg);
+    }
+  }
+
+}
+
+.screenshots {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  &__pics {
+    position: absolute;
+    width: 85%;
+    max-width: 500px;
+    top: 0;
+    left: 0;
+    transition: all 1s ease-in-out;
+
+  }
+
+  &__image {
+    position: relative;
+    margin-left: 90px;
+
+    @include mobile($iphone) {
+      margin-left: 0;
+      width: 250px;
+    }
+
+
+    & ~ span {
+      position: absolute;
+      font-weight: 700;
+      text-align: center;
+      border-radius: 50%;
+      color: $color-white;
+
+      &::after {
+        content: attr(data);
+        position: absolute;
+        display: inline-block;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 256px;
+        font-weight: 100;
+        white-space: pre;
+        top: -406px;
+        left: 70px;
+        transform: rotate(90deg);
+        transform-origin: left;
+        color: $color-bg-text;
+        z-index: -1;
+
+        @include mobile($iphone) {
+          display: none;
+        }
+      }
+
+      &:nth-of-type(1) {
+        top: 380px;
+        left: 30px;
+        @include square(90px);
+        font-size: 30px;
+        padding-top: 29px;
+
+        @include mobile($iphone) {
+          left: -65px;
+        }
+      }
+
+      &:nth-of-type(2) {
+        top: 170px;
+        left: 324px;
+        @include square(92px);
+        font-size: 18px;
+
+        @include mobile($iphone) {
+          left: 210px;
+        }
+      }
+    }
+
+
+  }
+
+  &__item {
+    position: relative;
+    display: block;
+    margin-top: 170px;
+    padding: 80px 100px 100px 550px;
+    width: 100%;
+    min-height: 725px;
+
+    @include mobile($ipad) {
+      margin-top: 30px;
+      padding: 750px 0 10px 30px;
+    }
+
+    @include mobile($iphone) {
+      padding: 550px 0 10px 0;
+    }
+
+    &:nth-child(2n) {
+      padding: 80px 700px 100px 0;
+
+      & > .screenshots__pics {
+        left: 600px !important;
+      }
+
+      @include mobile($ipad) {
+        padding: 750px 0 10px 30px;
+      
+        @include mobile($iphone) {
+          padding: 550px 0 10px 0;
+        }
+
+        & > .screenshots__pics {
+          left: 0 !important;
+        }
+      }
+    }
+
+    &:last-child {
+      padding-bottom: 30px;
+    }
+
+    //    & u{
+    //      text-decoration: none;
+    //      position: absolute;
+    //        display: inline-block;
+    //        font-family: 'Ubuntu', sans-serif;
+    //        font-size: 256px;
+    //        font-weight: 100;
+    //        white-space: pre;
+    //        top: -235px;
+    //        left: 395px;
+    //        transform: rotate(90deg);
+    //        transform-origin: left;
+    //        color: $color-bg-text;
+    //        z-index: -1;
+    //    }
+  }
+
+  &__title {
+    @extend .section__title;
+    margin-top: 50px;
+    text-align: left;
+  }
+
+  &__text {
+    margin-bottom: 40px;
+    padding: 15px 20px 15px 0;
+    font-size: 24px;
+    line-height: 1.4;
+    color: $color-features-title;
+  }
+
+}
+
+.rewiews {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  width: 100%;
+  
+  @include mobile($iphone) {
+         display: block;
+        }
+  &__item {
+    display: block;
+    position: relative;
+    padding: 45px 0 85px;
+    width: 49%;
+    max-width: 570px;
+    min-height: 195px;
+    
+    @include mobile($iphone) {
+      padding: 45px 0;
+      width: 100%;
+    }
+    
+    &::before {
+      content: "\201c";
+      position: absolute;
+      top: 20px;
+      left: 0;
+      font-size: 142px;
+      color: $color-first-bg;
+    }
+
+    &::after {
+      content: "\201e";
+      position: absolute;
+      bottom: 40px;
+      right: 0;
+      font-size: 142px;
+      color: $color-first-bg;
+    }
+  }
+
+  &__text {
+    padding-top: 60px;
+    font-size: 24px;
+    line-height: 1.4;
+    color: $color-features-title;
+  }
+
+  &__author {
+    margin-top: 30px;
+    font-style: normal;
+    color: $color-features-title;
+  }
+}
+
+.download {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  color: $color-white;
+  background-color: $color-first-bg;
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 110px 0;
+    width: 100%;
+    
+    @include mobile($iphone) {
+        display: block;
+      }
+  }
+
+  &__item {
+    position: relative;
+    width: 49%;
+    max-width: 570px;
+    
+    @include mobile($ipad) {
+        width: 100%;
+      }
+  }
+
+  &__title {
+    font-size: 36px;
+  }
+
+  &__text {
+    margin: 45px 0 30px;
+    width: 370px;
+    
+    @include mobile($iphone) {
+        width: 100%;
+      }
+  }
+
+  &__btn {
+    margin-right: 6px;
+    width: 150px;
+    height: 45px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      animation: shake 0.4s linear;
+    }
+  }
+
+  &__image {
+    position: absolute;
+    display: block;
+    max-width: 290px;
+    top: 0;
+    left: 0;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out, ;
+
+    @include mobile($iphone) {
+        display: none;
+      }
+    
+    &:nth-of-type(1) {
+      top: 20px;
+      left: 15px;
+      filter: blur(4px);
+      z-index: 1;
+    }
+
+    &:nth-of-type(2) {
+      top: -50px;
+      left: 226px;
+      z-index: 3;
+
+      @include mobile($ipad) {
+        left: 150px;
+      }
+    }
+
+    &:nth-of-type(3) {
+      top: 20px;
+      left: 420px;
+      filter: blur(4px);
+      z-index: 2;
+
+      @include mobile($ipad) {
+        display: none;
+      }
+    }
+  }
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  background-color: $color-features-title;
+
+  &__inner {
+    @extend .header__inner;
+    padding: 100px 0;
+    
+    @include mobile($ipad) {
+        padding: 30px 0;
+      & .social{
+        display: flex;
+      }
+      }
+  }
+
+  &__logo {
+    @extend .header__logo;
+    color: $color-first-bg;
+    transition: all 0.7s linear;
+
+    & span {
+      color: $color-orange;
+    }
+  }
+
+  & .nav__link,
+  & .social__icon {
+    color: $color-footer-nav;
+
+    &:before {
+      background-color: $color-features-title;
+    }
+
+    &:hover {
+      color: $color-orange;
+    }
+  }
+
+  &__copyright {
+    position: relative;
+    padding: 50px 0;
+    width: 100%;
+    max-width: 1593px;
+    margin: 0 auto;
+    text-align: right;
+    color: $color-footer-border;
+    border-top: 1px solid $color-footer-border;
+    
+    @include mobile($iphone) {
+        padding: 20px 0;
+      }
+  }
+}
+
+.hidden {
+
+
+  &_left {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  &_right {
+    opacity: 0;
+    transform: translateX(100px);
+    
+    @include mobile($iphone) {
+        transform: translateX(-100px);
+      }
+  }
+
+  &_center {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes jump {
+
+  from,
+  to {
+    bottom: 0;
+  }
+
+  60% {
+    bottom: 20px;
+  }
+}
+
+@keyframes shake {
+
+  from,
+  to,
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotate(0);
+  }
+
+  10% {
+    transform: rotate(10deg);
+  }
+
+  30% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  70% {
+    transform: rotate(-5deg);
+  }
+
+  90% {
+    transform: rotate(2deg);
+  }
+
+  95% {
+    transform: rotate(-2deg);
+  }
+
+}

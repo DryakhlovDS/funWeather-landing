@@ -1,0 +1,17 @@
+@mixin text($size, $weight, $transform: none){
+  font-size: $size;
+  font-weight: $weight;
+  text-transform: $transform;
+}
+
+@mixin square($w){
+  width: $w;
+  height: $w;
+  padding:($w*0.38) 0;
+}
+
+@mixin mobile($device){
+  @media screen and (max-width: $device){
+    @content;
+  }
+}
